@@ -308,7 +308,7 @@ function createLegend()
             .data([0].concat(colorScale.quantiles()))
             .enter().append("g")
             .attr("class", "legend")
-            .attr("transform", "translate(" +(2*legendLeft) +" ,"+ (legendBottom*2)+")")
+            .attr("transform", "translate(" +(2*legendLeft) +" ,"+ (legendBottom*2)+")");
             
         legend.append("rect")
                 .attr("x", function (d, i) { return 1.5*xScale.rangeBand()*i; })

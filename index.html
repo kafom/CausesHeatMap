@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Causes Heat Map with Toolbox.</title>
+		<title>Causes Heat Map with Toolbox and Aggrgate Selection and Drilling.</title>
         <script src="http://d3js.org/d3.v3.min.js"></script>
 		<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -14,64 +14,64 @@
         <link rel="stylesheet" type="text/css" href="css/style59Representation.css">
 
 		<style type="text/css">
-        #diseaseTooltip {
-        position: absolute;
-        display: none;
-        top: 100px;
-        left: 100px;
-        -moz-border-radius:5px;
-        border-radius: 5px;
-        border: 2px solid #000;
-        /* background: #222222; */
-        background: #fff;
-        opacity: .9;
-        /* color: #eeeeee; */
-        color: black;
-        padding: 10px;
-        width: 200px;
-        font-size: 12px;
-        z-index: 10;
-    }
-     #diseaseNameTooltip {
-        position: absolute;
-        display: none;
-        top: 10px;
-        left: 10px;
-        -moz-border-radius:10px;
-        border-radius: 10px;
-       /* border: 1px solid #000;*/
-        /* background: #222222; */
-        /*background: #fff;*/
-        opacity: .9;
-        /* color: #eeeeee; */
-        color: black;
-        padding: 5px;
-        width: 200px;
-        font-size: 12px;
-        z-index: 10;
-    }
-    #diseaseNameTooltip .value{
-        font-weight:bold;
-        color: white;
-    }
+			#diseaseTooltip {
+				position: absolute;
+				display: none;
+				top: 100px;
+				left: 100px;
+				-moz-border-radius:5px;
+				border-radius: 5px;
+				border: 2px solid #000;
+				/* background: #222222; */
+				background: #fff;
+				opacity: .9;
+				/* color: #eeeeee; */
+				color: black;
+				padding: 10px;
+				width: 200px;
+				font-size: 12px;
+				z-index: 10;
+			}
+			#diseaseNameTooltip {
+				position: absolute;
+				display: none;
+				top: 10px;
+				left: 10px;
+				-moz-border-radius:10px;
+				border-radius: 10px;
+			   /* border: 1px solid #000;*/
+				/* background: #222222; */
+				/*background: #fff;*/
+				opacity: .9;
+				/* color: #eeeeee; */
+				color: black;
+				padding: 5px;
+				width: 200px;
+				font-size: 12px;
+				z-index: 10;
+			}
+			#diseaseNameTooltip .value{
+				font-weight:bold;
+				color: white;
+			}
 
-    .tooltip .title {
-        font-size: 13px;
-    }
+			.tooltip .title {
+				font-size: 13px;
+			}
 
-    .tooltip .name {
-        font-weight:bold;
-    }
-    h1{
-        text-align:center;
-        color:black;
-        font-size: 34px;
-        display: block;
-    }
-            #vis{
-                display: block;
-                margin-top: 10px;
-            }
+			.tooltip .name {
+				font-weight:bold;
+			}
+			h1{
+				text-align:center;
+				color:black;
+				font-size: 34px;
+				display: block;
+			}
+			#vis{
+				display: block;
+				margin-top: 10px;
+			}
 
 		</style>
 	</head>
@@ -177,7 +177,8 @@
         var filteredDatasetHM = [];
         
 
-        selected =new Object();
+        //selected =new Object();
+		var selected = {};
 		//SVG ELEMENT
 		var svg = d3.select("#vis")
 					.append("svg")
@@ -218,9 +219,6 @@
                 .scale(yScaleBar)
                 .orient("left")
                 .tickFormat(d3.format(".2s"));
-
-
-       
 
         var tooltip = CustomTooltip("diseaseTooltip", 200);
         var nameTooltip = CustomTooltip("diseaseNameTooltip", 400);
